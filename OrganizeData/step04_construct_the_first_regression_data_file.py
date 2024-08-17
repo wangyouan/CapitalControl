@@ -13,7 +13,7 @@ import pandas as pd
 from pandas import DataFrame
 from scipy.stats.mstats import winsorize
 
-from CapitalControl.Constant import Constants as const
+from Constant import Constants as const
 
 if __name__ == '__main__':
     sd_esg_df: DataFrame = pd.read_pickle(os.path.join(const.TEMP_PATH, '2015_2021_shangdao_all_esg_data.pkl'))

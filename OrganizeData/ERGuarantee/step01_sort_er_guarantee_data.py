@@ -13,7 +13,7 @@ import zipfile
 import pandas as pd
 from pandas import DataFrame
 
-from CapitalControl.Constant import Constants as const
+from Constant import Constants as const
 
 
 def check_for_letters(s):

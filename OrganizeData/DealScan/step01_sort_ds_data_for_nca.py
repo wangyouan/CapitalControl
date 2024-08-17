@@ -19,7 +19,7 @@ import os
 import pandas as pd
 from pandas import DataFrame
 
-from CapitalControl.Constant import Constants as const
+from Constant import Constants as const
 
 
 def check_facility_purpose_dummy(row, purpose_set):

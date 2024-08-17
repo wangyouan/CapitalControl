@@ -12,7 +12,7 @@ import zipfile
 import pandas as pd
 from pandas import DataFrame
 
-from CapitalControl.Constant import Constants as const
+from Constant import Constants as const
 
 if __name__ == '__main__':
     csmar_ma_path = os.path.join(const.CSMAR_PATH, 'MA')

@@ -11,7 +11,7 @@ import os
 import pandas as pd
 from pandas import DataFrame
 
-from CapitalControl.Constant import Constants as const
+from Constant import Constants as const
 
 if __name__ == '__main__':
     cs_df_all: DataFrame = pd.read_pickle(os.path.join(const.TEMP_PATH, '1990_2023_CSMAR_financial_data.pkl'))

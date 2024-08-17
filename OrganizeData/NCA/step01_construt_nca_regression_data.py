@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 from pandas import DataFrame
 
-from CapitalControl.Constant import Constants as const
+from Constant import Constants as const
 
 if __name__ == '__main__':
     nci_index: DataFrame = pd.read_excel(os.path.join(const.NCA_DATA_PATH, 'nci.xlsx'), sheet_name='NCI')

@@ -12,7 +12,7 @@ import zipfile
 import pandas as pd
 from pandas import DataFrame
 
-from CapitalControl.Constant import Constants as const
+from Constant import Constants as const
 
 
 def sort_csmar_data(csmar_df: DataFrame):

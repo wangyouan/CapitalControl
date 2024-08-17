@@ -14,7 +14,7 @@ from tqdm import tqdm, trange
 import pandas as pd
 from pandas import DataFrame
 
-from CapitalControl.Constant import Constants as const
+from Constant import Constants as const
 
 if __name__ == '__main__':
     year_esg_dfs = list()
