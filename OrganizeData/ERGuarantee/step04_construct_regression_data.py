@@ -8,6 +8,7 @@ import os.path
 # @Email: wangyouan@gamil.com
 
 import pandas as pd
+from pandas import DataFrame
 import numpy as np
 
 from Constant import Constants as const
@@ -15,20 +16,20 @@ from Constant import Constants as const
 # =============================================================================
 
 if __name__ == '__main__':
-
-    df1 = pd.read_csv("2014_2023_firm_financial/2014_2023_firm_financial.csv", error_bad_lines=False)
-    df2 = pd.read_csv("Cdata_data_guarantee.csv", error_bad_lines=False)
-    df3 = pd.read_csv("2015_2021_esg_data.csv", error_bad_lines=False)
-
-    merged_df = pd.merge(df1, df2, on=['Symbol', 'Year'], how='left')
-    merged_df = pd.merge(merged_df, df3, on=['Symbol', 'Year'], how='left')
-
-    columns_to_drop = ['tic', 'comn', 'comn_short', 'secind', 'sdind1', 'sdind2', 'tic2']
-    df4 = merged_df.drop(columns=columns_to_drop)
+    # df1 = pd.read_csv("2014_2023_firm_financial/2014_2023_firm_financial.csv", error_bad_lines=False)
+    # df2 = pd.read_csv("Cdata_data_guarantee.csv", error_bad_lines=False)
+    # df3 = pd.read_csv("2015_2021_esg_data.csv", error_bad_lines=False)
+    #
+    # merged_df = pd.merge(df1, df2, on=['Symbol', 'Year'], how='left')
+    # merged_df = pd.merge(merged_df, df3, on=['Symbol', 'Year'], how='left')
+    #
+    # columns_to_drop = ['tic', 'comn', 'comn_short', 'secind', 'sdind1', 'sdind2', 'tic2']
+    # df4 = merged_df.drop(columns=columns_to_drop)
+    df4: DataFrame = pd.read_csv(os.path.join(r'D:\Onedrive\Projects\CapitalControl\data\KarXiong', 'df4.csv'))
 
     # Loop through each listed columns and create lagged versions
     df4 = df4.sort_values(by=['Symbol', 'Year'])
-    columns_to_lag = ['esg_score', 'esg_gov_score', 'esg_risk_score', 'env_score', 'social_score']
+    columns_to_lag = ['esg_score', 'esg_gov_score', 'esg_risk_score', 'env_score', 'social_score', 'cgov_score']
     columns_to_drop = columns_to_lag.copy()
 
     for col in columns_to_lag:  # -1 forward, 1 backward
@@ -49,10 +50,21 @@ if __name__ == '__main__':
 
     # Create a new column "er_foreign_gua" and set it to 0 initially
     df5['er_foreign_gua'] = 0
+    df5['has_esg_before'] = 0
+    df5['er_foreign_gua_full'] = 0
 
     # Identify Symbols with at least one "NumGuarantee" greater than 0 between 2014 and 2017
     symbols_with_gua = df5_filtered[df5_filtered['NumGuarantee'] > 0]['Symbol'].unique()
+    symbols_has_esg = df5_filtered[df5_filtered['esg_score_1'].notnull()]['Symbol'].unique()
 
     # Set "er_foreign_gua" to 1 for these Symbols
     df5.loc[df5['Symbol'].isin(symbols_with_gua), 'er_foreign_gua'] = 1
-    df5.to_stata(os.path.join(const.OUTPUT_PATH, '20240819_cc_reg_data.dta'), write_index=False, version=119)
+    df5.loc[df5['Symbol'].isin(symbols_has_esg), 'has_esg_before'] = 1
+
+    symbols_with_gua = df5[df5['NumGuarantee'] > 0]['Symbol'].unique()
+    df5.loc[df5['Symbol'].isin(symbols_with_gua), 'er_foreign_gua_full'] = 1
+
+
+    for year in range(2014, 2022):
+        df5.loc[:, f'dummy_{year}'] = (df5['Year'] == year).astype(int)
+    df5.to_stata(os.path.join(const.OUTPUT_PATH, '20240820_cc_reg_data.dta'), write_index=False, version=119)
