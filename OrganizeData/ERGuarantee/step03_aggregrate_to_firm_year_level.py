@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     df3 = df2[['InstitutionID', 'Symbol', 'SecurityID', 'ShortName', 'FullName',
                'TotalLoan', 'Year', 'NumGuarantee']]
-    df3 = df3.drop_duplicates()
+    df3 = df3.drop_duplicates(['Symbol', 'Year'])
     df3 = df3.sort_values(by=['Symbol', 'Year'])
 
     df3.to_csv('240816_firm_year_level_data.csv', index=False, encoding='utf-8-sig')
