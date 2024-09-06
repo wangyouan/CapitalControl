@@ -7,10 +7,12 @@
 # @Email: wangyouan@gamil.com
 
 import os
+import socket
 
 
 class PathInfo(object):
     # PROJECT_PATH = '/mnt/d/Onedrive/Temp/Projects/CapitalControl'
+    COMPUTER_NAME = socket.gethostname()
     PROJECT_PATH = r'D:\Onedrive\Temp\Projects\CapitalControl'
     TEMP_PATH = os.path.join(PROJECT_PATH, 'temp')
     OUTPUT_PATH = os.path.join(PROJECT_PATH, 'regression_data')
