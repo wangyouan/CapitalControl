@@ -16,7 +16,7 @@ class PathInfo(object):
     PROJECT_PATH = r'D:\Onedrive\Temp\Projects\CapitalControl'
     TEMP_PATH = os.path.join(PROJECT_PATH, 'temp')
     OUTPUT_PATH = os.path.join(PROJECT_PATH, 'regression_data')
-    REGRESSION_RESULT_PATH = os.path.join(PROJECT_PATH, 'regression_results', '20241020')
+    REGRESSION_RESULT_PATH = os.path.join(PROJECT_PATH, 'regression_results')
 
     # DATABASE_PATH = '/mnt/d/Onedrive/Documents/data'
     DATABASE_PATH = r'D:\Onedrive\Documents\data'
