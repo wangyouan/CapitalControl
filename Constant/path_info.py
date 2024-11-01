@@ -13,8 +13,8 @@ import socket
 class PathInfo(object):
     # PROJECT_PATH = '/mnt/d/Onedrive/Temp/Projects/CapitalControl'
     COMPUTER_NAME = socket.gethostname()
-    if COMPUTER_NAME == 'ubuntu-server':
-        PROJECT_PATH = '/home/user/projects'
+    if COMPUTER_NAME == 'wyaamd-server001':
+        PROJECT_PATH = '/home/user/projects/DGFL'
         OUTPUT_PATH = os.path.join(PROJECT_PATH, 'output')
 
         # DATABASE_PATH = '/mnt/d/Onedrive/Documents/data'
