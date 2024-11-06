@@ -60,18 +60,13 @@ if __name__ == '__main__':
 
     for var in variables:
         # Pre-period comparison
-        treated_mean, treated_median, treated_n, control_mean, control_median, control_n, difference, p_value, significance = compare_groups(
-            treated_pre, control_pre, var)
-        summary_pre.append(
-            [var, treated_mean, treated_median, treated_n, control_mean, control_median, control_n, difference, p_value,
-             significance])
+        t_mean, t_median, t_n, c_mean, c_median, c_n, diff, p_val, sig = compare_groups(treated_pre, control_pre, var)
+        summary_pre.append([var, t_mean, t_median, t_n, c_mean, c_median, c_n, diff, p_val, sig])
 
         # Post-period comparison
-        treated_mean, treated_median, treated_n, control_mean, control_median, control_n, difference, p_value, significance = compare_groups(
-            treated_post, control_post, var)
+        t_mean, t_median, t_n, c_mean, c_median, c_n, diff, p_val, sig = compare_groups(treated_post, control_post, var)
         summary_post.append(
-            [var, treated_mean, treated_median, treated_n, control_mean, control_median, control_n, difference, p_value,
-             significance])
+            [var, t_mean, t_median, t_n, c_mean, c_median, c_n, diff, p_val, sig])
 
     # Convert summaries to DataFrames
     columns = ['Variable', 'Treated Mean', 'Treated Median', 'Treated N', 'Control Mean', 'Control Median', 'Control N',
